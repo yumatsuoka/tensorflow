@@ -12,7 +12,7 @@ x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]))
 #bias.  W*x + b so 10 dim
 b = tf.Variable(tf.zeros([10]))
-#implement. tf.matmul is $BFb@Q(B. y is output
+#implement. tf.matmul is 内積. y is output
 y = tf.nn.softmax(tf.matmul(x, W) + b)
 #a box to put a targets
 y_ = tf.placeholder(tf.float32, [None, 10])
@@ -34,7 +34,7 @@ for i in range(1000):
     #if implement 1 batch, apply minimize.
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
 
-#$B=PNOAX$NCf$G0lHVBg$-$/=PNO$7$F$$$kItJ,$r(Bargmax$B$GJV$9!#(B
+#出力層の中で一番大きく出力している部分をargmaxで返す。
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
